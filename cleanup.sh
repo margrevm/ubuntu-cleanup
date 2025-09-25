@@ -19,10 +19,11 @@ CLEANUP_DIRS=(
 NB_DAYS_TO_KEEP=90
 
 # Remove files older than NB_DAYS_TO_KEEP days in the specified folders
+echo "[Removing old files]"
 for CLEANUP_DIR in "${CLEANUP_DIRS[@]}"; do
     if [ -d "$CLEANUP_DIR" ]; then
         echo "➜ Remove files older than $NB_DAYS_TO_KEEP from '$CLEANUP_DIR' folder..."
-        find "$CLEANUP_DIR" -type f -mtime +$NB_DAYS_TO_KEEP -name '*' -delete
+        find "$CLEANUP_DIR" -type f -mtime +$NB_DAYS_TO_KEEP -name '*' -delete -print
     else
         echo "➜ Directory '$CLEANUP_DIR' does not exist. Skipping..."
     fi

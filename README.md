@@ -4,7 +4,7 @@ Maintenance script to clean up disk space (unnecessary or old files, cache, ...)
 
 ## Features
 
-- 📅 Will remove files older than a specified number of days;
+- 📅 Will remove files older than a specified number of days in specified folders;
 - 🗑️ Cleaning cache and temporary files.
 
 This script will not cleanup packages. Check out [ubuntu-update](https://github.com/margrevm/ubuntu-update.git) for this purpose.

@@ -19,7 +19,7 @@ CLEANUP_DIRS=(
 NB_DAYS_TO_KEEP=60
 
 # Remove files older than NB_DAYS_TO_KEEP days in the specified folders
-echo "[Removing old files]"
+echo "[Removing old files & folders]"
 for CLEANUP_DIR in "${CLEANUP_DIRS[@]}"; do
     if [ -d "$CLEANUP_DIR" ]; then
 
@@ -52,6 +52,23 @@ for CLEANUP_DIR in "${CLEANUP_DIRS[@]}"; do
         echo "➜ Directory '$CLEANUP_DIR' does not exist. Skipping..."
     fi
 done
+
+# ---------------------------------------------------
+# Remove empty folders (recursively in the given folders)
+# ---------------------------------------------------
+REMOVE_EMPTY_DIRS=(
+	$HOME/Downloads
+	$HOME/Pictures/Screenshots
+)
+
+echo "➜ Removing empty folders"
+for REMOVE_EMPTY_DIR in "${REMOVE_EMPTY_DIRS[@]}"; do
+    if [ -d "$REMOVE_EMPTY_DIR" ]; then
+        find "$REMOVE_EMPTY_DIR" -depth -type d -empty -exec rmdir {} \;
+    fi
+done
+
+
 
 # ---------------------------------------------------
 # Clean trash

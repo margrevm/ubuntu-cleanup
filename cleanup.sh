@@ -68,7 +68,11 @@ for REMOVE_EMPTY_DIR in "${REMOVE_EMPTY_DIRS[@]}"; do
     fi
 done
 
-
+# ---------------------------------------------------
+# Remove unnecessary log folders
+# ---------------------------------------------------
+echo "➜ Removing unnecessary log folders"
+rm -rf $HOME/cpdb
 
 # ---------------------------------------------------
 # Clean trash

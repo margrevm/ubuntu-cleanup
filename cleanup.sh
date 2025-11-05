@@ -12,18 +12,18 @@
 # ---------------------------------------------------
 
 CLEANUP_DIRS=(
-	$HOME/Downloads
-	$HOME/Pictures/Screenshots
+    "$HOME/Downloads"
+    "$HOME/Pictures/Screenshots"
 )
 
 NB_DAYS_TO_KEEP=60
 
 # Remove files older than NB_DAYS_TO_KEEP days in the specified folders
-echo "[Removing old files & folders]"
+printf '\033[1;31m[Removing old files & folders]\033[0m\n'
 for CLEANUP_DIR in "${CLEANUP_DIRS[@]}"; do
     if [ -d "$CLEANUP_DIR" ]; then
 
-        echo "➜ Files older than $NB_DAYS_TO_KEEP days in '$CLEANUP_DIR':"
+        printf '\033[0;31m➜ Files older than %s days in '\''%s'\''\033[0m\n' "$NB_DAYS_TO_KEEP" "$CLEANUP_DIR"
         FILES_TO_DELETE=$(find "$CLEANUP_DIR" -type f -mtime +$NB_DAYS_TO_KEEP -name '*')
         if [ -z "$FILES_TO_DELETE" ]; then
             echo "  No files to delete."
@@ -38,7 +38,7 @@ for CLEANUP_DIR in "${CLEANUP_DIRS[@]}"; do
 
         # Ensure TOTAL_SIZE is a single line
         TOTAL_SIZE=$(echo "$TOTAL_SIZE" | tr -d '\n')
-        echo ""
+        printf '\n'
         read -p "Delete these files (Total size: $TOTAL_SIZE)? [y/N]: " CONFIRM
 
         if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
@@ -49,7 +49,7 @@ for CLEANUP_DIR in "${CLEANUP_DIRS[@]}"; do
             echo "Skipped deleting files in '$CLEANUP_DIR'."
         fi
     else
-        echo "➜ Directory '$CLEANUP_DIR' does not exist. Skipping..."
+        printf '\033[0;31m➜ Directory '\''%s'\'' does not exist. Skipping...\033[0m\n' "$CLEANUP_DIR"
     fi
 done
 
@@ -57,11 +57,11 @@ done
 # Remove empty folders (recursively in the given folders)
 # ---------------------------------------------------
 REMOVE_EMPTY_DIRS=(
-	$HOME/Downloads
-	$HOME/Pictures/Screenshots
+    "$HOME/Downloads"
+    "$HOME/Pictures/Screenshots"
 )
 
-echo "➜ Removing empty folders"
+printf '\033[0;31m➜ Removing empty folders\033[0m\n'
 for REMOVE_EMPTY_DIR in "${REMOVE_EMPTY_DIRS[@]}"; do
     if [ -d "$REMOVE_EMPTY_DIR" ]; then
         find "$REMOVE_EMPTY_DIR" -depth -type d -empty -exec rmdir {} \;
@@ -71,8 +71,8 @@ done
 # ---------------------------------------------------
 # Remove unnecessary log folders
 # ---------------------------------------------------
-echo "➜ Removing unnecessary log folders"
-rm -rf $HOME/cpdb
+printf '\033[0;31m➜ Removing unnecessary log folders\033[0m\n'
+rm -rf "$HOME/cpdb"
 
 # ---------------------------------------------------
 # Clean trash

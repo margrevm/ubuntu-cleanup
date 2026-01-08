@@ -14,6 +14,7 @@
 CLEANUP_DIRS=(
     "$HOME/Downloads"
     "$HOME/Pictures/Screenshots"
+    "$HOME/Screencasts"
 )
 
 NB_DAYS_TO_KEEP=60
@@ -59,6 +60,8 @@ done
 REMOVE_EMPTY_DIRS=(
     "$HOME/Downloads"
     "$HOME/Pictures/Screenshots"
+    "$HOME/Screencasts"
+    "$HOME/cpdb"
 )
 
 printf '\033[0;31m➜ Removing empty folders\033[0m\n'
@@ -72,12 +75,6 @@ for REMOVE_EMPTY_DIR in "${REMOVE_EMPTY_DIRS[@]}"; do
         find "$REMOVE_EMPTY_DIR" -depth -type d -empty -exec rmdir -v {} \;
     fi
 done
-
-# ---------------------------------------------------
-# Remove unnecessary log folders
-# ---------------------------------------------------
-printf '\033[0;31m➜ Removing unnecessary log folders\033[0m\n'
-rm -rf "$HOME/cpdb"
 
 # ---------------------------------------------------
 # Clean trash

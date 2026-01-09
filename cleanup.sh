@@ -2,7 +2,7 @@
 
 ## Script to clean up disk space (unnecessary or old files, cache, ...)
 ##
-## Copyright (C) 2025 Mike Margreve (mike.margreve@outlook.com)
+## Copyright (C) 2026 Mike Margreve (mike.margreve@outlook.com)
 ## Permission to copy and modify is granted under the foo license
 ##
 ## Usage: cleanup [no arguments]
@@ -60,8 +60,6 @@ done
 REMOVE_EMPTY_DIRS=(
     "$HOME/Downloads"
     "$HOME/Pictures/Screenshots"
-    "$HOME/Screencasts"
-    "$HOME/cpdb"
 )
 
 printf '\033[0;31m➜ Removing empty folders\033[0m\n'
@@ -75,6 +73,17 @@ for REMOVE_EMPTY_DIR in "${REMOVE_EMPTY_DIRS[@]}"; do
         find "$REMOVE_EMPTY_DIR" -depth -type d -empty -exec rmdir -v {} \;
     fi
 done
+
+# ---------------------------------------------------
+# Remove dirs
+# ---------------------------------------------------
+REMOVE_DIRS=(
+    "$HOME/Screencasts"
+    "$HOME/cpdb"
+)
+
+printf '\033[0;31m➜ Removing folders\033[0m\n'
+rm -rfv -- "${REMOVE_DIRS[@]}"
 
 # ---------------------------------------------------
 # Clean trash
